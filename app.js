@@ -84,7 +84,7 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
 
   // Make sure this is a page subscription
-  console.log(data);
+  
   if (data.object == 'page') {
     // Iterate over each entry
     // There may be multiple if batched
@@ -116,6 +116,7 @@ app.post('/webhook', function (req, res) {
     //
     // You must send back a 200, within 20 seconds, to let us know you've 
     // successfully received the callback. Otherwise, the request will time out.
+	console.log("Response body "+ res.body);
     res.sendStatus(200);
   }
 });
