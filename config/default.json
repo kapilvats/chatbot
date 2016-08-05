@@ -1,6 +1,6 @@
 {
     "appSecret": "d36a6673fe90e6df78f488829eeb623a",
-    "pageAccessToken": "this-s-page-access-token",
-    "validationToken": "validationToken",
+    "pageAccessToken": "EAADMhzyAnzsBAO19spwGkmxcj3q7XZBKrpxSh4cym92EJugrljMs8M9ZAJYXA0YL0MQav4JwvTl9UvxEHXlaPFHe8TZBBNHZA68sKzmgjOVEnx7lUa6sPNNB1RfZAcHM4sZBIIo8vmsYBhQZCFD8qHEhh0SLjlNDtl5HkMKGTiFRwZDZD",
+    "validationToken": "this-is-validationToken",
     "serverURL": "https://kkv.herokuapp.com/webhook"
 }
