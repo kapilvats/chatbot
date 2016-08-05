@@ -80,15 +80,15 @@
       </form>
 	  </div>
   <script>
-      $("form").submit(function(){
+      $("form").submit(function() {
           var username = $("#inputEmail").val();
           var password = $("#inputPassword").val();
-          if(username.length == 0 || password.length == 0){
+          if (username.length == 0 || password.length == 0) {
               return;
           }
 
           $.ajax({
-              url: 'https://lab360.flysas.com/bot/login?username='+  username+'&password='+password,
+              url: 'https://lab360.flysas.com/bot/login?username=' + username + '&password=' + password,
               type: 'post',
               headers: {
                   "Authorization": 'Basic U0FTTGFiczp0ZXN0Ym90'
@@ -98,8 +98,8 @@
                   console.info(data);
               }
           });
-        return false;
-
+          return false;
+      });
   </script>
 
 </body></html>
