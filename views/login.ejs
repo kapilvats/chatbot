@@ -86,13 +86,20 @@
           if(username.length == 0 || password.length == 0){
               return;
           }
-          $.post('https://lab360.flysas.com/bot/login?username='+  username+'&password='+password, function(data){
-            console.log(data);
+
+          $.ajax({
+              url: 'https://lab360.flysas.com/bot/login?username='+  username+'&password='+password,
+              type: 'post',
+              headers: {
+                  "Authorization": 'Basic U0FTTGFiczp0ZXN0Ym90'
+              },
+              dataType: 'json',
+              success: function (data) {
+                  console.info(data);
+              }
           });
-          var url = <%= redirectURISuccess %>
-          console.log(username);
-          return false;
-      });
+        return false;
+
   </script>
 
 </body></html>
