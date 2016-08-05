@@ -84,6 +84,7 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
 
   // Make sure this is a page subscription
+  console.log(data);
   if (data.object == 'page') {
     // Iterate over each entry
     // There may be multiple if batched
