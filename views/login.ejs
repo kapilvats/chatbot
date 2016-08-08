@@ -80,7 +80,7 @@
       </form>
 	  </div>
 
-    <div>
+   <!-- <div>
         Account linking token: <%= accountLinkingToken %>
     </div>
 
@@ -91,7 +91,7 @@
     <div>
         Redirect URI Successful: <%= redirectURISuccess %>
     </div>
-
+-->
     <script>
       $("form").submit(function() {
           var username = $("#inputEmail").val();
@@ -117,10 +117,21 @@
       });
 
       function handleData(data){
+
           console.log("hello");
-          var test = "<%= redirectURISuccess %>"
+          var test = "<%= redirectURI %>"
           console.log(test);
-          window.location.href = test;
+          window.location.href = test + "&authorization_code="+guid();
+      }
+
+      function guid() {
+          function s4() {
+              return Math.floor((1 + Math.random()) * 0x10000)
+                      .toString(16)
+                      .substring(1);
+          }
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                  s4() + '-' + s4() + s4() + s4();
       }
   </script>
 
