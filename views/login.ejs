@@ -100,17 +100,21 @@
               return;
           }
           var data = {};
+          var psid = "<%= psid %>"
           data.userName = username;
           data.password = password;
-          data.id='idddd';
+          data.psid = psid;
           var call = $.ajax({
-              url: '/login?username=' + username + '&password=' + password + "&id=1213243",
+              url: '/login?username=' + username + '&password=' + password + "&id="+psid,
               type: 'post',
               data: JSON.stringify(data),
               headers: {
                   "Authorization": 'Basic U0FTTGFiczp0ZXN0Ym90'
               },
               contentType: "application/json"
+          });
+          call.fail(function (res, status){
+              alert("Please provide correct username & password");
           });
           call.done(handleData);
           return false;

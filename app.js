@@ -137,17 +137,59 @@ app.get('/authorize', function(req, res) {
   // Redirect users to this URI on successful login
   var redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
 
-  res.render('login', {
-    accountLinkingToken: accountLinkingToken,
-    redirectURI: redirectURI,
-    redirectURISuccess: redirectURISuccess
-  });
+  var callback = function (error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+    var d = JSON.parse(body);
+    res.render('login', {
+      accountLinkingToken: accountLinkingToken,
+      redirectURI: redirectURI,
+      redirectURISuccess: redirectURISuccess,
+      psid: d.id
+    });
+
+  };
+  getPSID(accountLinkingToken, callback);
 });
 
 app.post('/login', function(req, res) {
   console.log(req.body);
-  res.send(200);
+  var uname = req.body.userName;
+  var password = req.body.password;
+  var psid = req.body.psid;
+  request({
+    uri: 'https://lab360.flysas.com/bot/login',
+    qs: { username: uname, password: password, id: psid },
+    method: 'POST',
+    headers: {authorization: 'Basic U0FTTGFiczp0ZXN0Ym90'}
+
+  }, function (error, response, body) {
+    console.log("---------------------------------");
+    console.log(response);
+    if (!error && response.statusCode == 200) {
+      res.sendStatus(200);
+    } else {
+      console.error(response.error);
+      res.sendStatus(401);
+    }
+
+  });
+
 });
+
+function getPSID(token, callback){
+  var options = {
+    method: 'GET',
+    url: 'https://graph.facebook.com/v2.6/me',
+    qs:
+    { access_token: 'EAADMhzyAnzsBAO19spwGkmxcj3q7XZBKrpxSh4cym92EJugrljMs8M9ZAJYXA0YL0MQav4JwvTl9UvxEHXlaPFHe8TZBBNHZA68sKzmgjOVEnx7lUa6sPNNB1RfZAcHM4sZBIIo8vmsYBhQZCFD8qHEhh0SLjlNDtl5HkMKGTiFRwZDZD',
+      fields: 'recipient ',
+      account_linking_token: token
+    }
+  };
+  console.log(options);
+  request(options, callback);
+}
 
 /*
  * Verify that the callback came from Facebook. Using the App Secret from 
