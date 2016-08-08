@@ -79,27 +79,49 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign in</button>
       </form>
 	  </div>
-  <script>
+
+    <div>
+        Account linking token: <%= accountLinkingToken %>
+    </div>
+
+    <div>
+        Redirect URI: <%= redirectURI %>
+    </div>
+
+    <div>
+        Redirect URI Successful: <%= redirectURISuccess %>
+    </div>
+
+    <script>
       $("form").submit(function() {
           var username = $("#inputEmail").val();
           var password = $("#inputPassword").val();
           if (username.length == 0 || password.length == 0) {
               return;
           }
-
-          $.ajax({
-              url: 'https://lab360.flysas.com/bot/login?username=' + username + '&password=' + password,
+          var data = {};
+          data.userName = username;
+          data.password = password;
+          data.id='idddd';
+          var call = $.ajax({
+              url: '/login?username=' + username + '&password=' + password + "&id=1213243",
               type: 'post',
+              data: JSON.stringify(data),
               headers: {
                   "Authorization": 'Basic U0FTTGFiczp0ZXN0Ym90'
               },
-              dataType: 'json',
-              success: function (data) {
-                  console.info(data);
-              }
+              contentType: "application/json"
           });
+          call.done(handleData);
           return false;
       });
+
+      function handleData(data){
+          console.log("hello");
+          var test = <%= redirectURISuccess %>
+          console.log(test);
+          window.location = test;
+      }
   </script>
 
 </body></html>

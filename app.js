@@ -144,6 +144,11 @@ app.get('/authorize', function(req, res) {
   });
 });
 
+app.post('/login', function(req, res) {
+  console.log(req.body);
+  res.send(200);
+});
+
 /*
  * Verify that the callback came from Facebook. Using the App Secret from 
  * the App Dashboard, we can verify the signature that is sent with each 
